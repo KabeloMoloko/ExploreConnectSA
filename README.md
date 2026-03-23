@@ -1,4 +1,3 @@
-## 📚 Career Development Modules
 
 <details>
 <summary>🎯 ExploreConnectSA UML Diagram</summary>
