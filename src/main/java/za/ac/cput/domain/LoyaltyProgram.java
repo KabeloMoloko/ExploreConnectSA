@@ -72,7 +72,7 @@ public class LoyaltyProgram {
         private LocalDateTime joinDate;
         private List<String> rewards;
 
-        public Builder() {
+        public Builder(int points, String tier, LocalDateTime joinDate, List<String> rewards) {
             this.programId = IdGenerator.getInstance().generateId();
             this.points = 0;
             this.tier = "BRONZE";
