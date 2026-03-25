@@ -55,7 +55,7 @@ public class HotelBookingFactory {
             boolean wifiIncluded,
             boolean parkingIncluded,
             List<String> specialRequests,
-            String cancellationPolicy,
+            CancellationPolicy cancellationPolicy,
             Customer customer,
             Traveler traveler,
             PaymentDetails payment,
