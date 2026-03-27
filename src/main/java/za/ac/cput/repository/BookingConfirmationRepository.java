@@ -1,7 +1,6 @@
 package za.ac.cput.repository;
 
 import za.ac.cput.domain.BookingConfirmation;
-import za.ac.cput.repository.IBookingConfirmationRepository;  // added import
 import za.ac.cput.util.Helper;
 
 import java.util.ArrayList;
