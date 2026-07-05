@@ -6,6 +6,7 @@
   
 <details>
   <summary>🎯 ExploreConnectSA Factory Milestone</summary>
-  ![Group-SD8-Factory-Milestone.pdf](https://github.com/user-attachments/files/29676958/Group-SD8-Factory-Milestone.pdf)
+ 
+  [![Group-SD8-Factory-Milestone.pdf](https://img.shields.io/badge/View-UML%20Diagram-blue?style=for-the-badge)](Group-SD8-Factory-Milestone.pdf)
 </details>
 
