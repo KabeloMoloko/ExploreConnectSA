@@ -1,7 +1,6 @@
-
 <details>
 <summary>🎯 ExploreConnectSA UML Diagram</summary>
-  
+ ![Group_SD8_UpdatedUML.pdf](https://github.com/user-attachments/files/29678167/Group_SD8_UpdatedUML.pdf)  
 </details>
   
 <details>
