@@ -1,8 +1,8 @@
 
 <details>
 <summary>🎯 ExploreConnectSA UML Diagram</summary>
-  ![Group_SD8_UpdatedUML.pdf](https://github.com/user-attachments/files/29676893/Group_SD8_UpdatedUML.pdf)
-  </details>
+  [![UML Diagram](https://img.shields.io/badge/View-UML%20Diagram-blue?style=for-the-badge)](Group_SD8_UpdatedUML.pdf)
+</details>
   
 <details>
   <summary>🎯 ExploreConnectSA Factory Milestone</summary>
