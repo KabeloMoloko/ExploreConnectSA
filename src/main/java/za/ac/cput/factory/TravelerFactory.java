@@ -1,8 +1,6 @@
 package za.ac.cput.factory;
 /* TravelerFactory.java
-
    Traveler Factory class
-
    Author: Alakhe Mxakato (230485316)
 
    Date: 28 June 2026

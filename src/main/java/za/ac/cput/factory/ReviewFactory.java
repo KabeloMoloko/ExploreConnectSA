@@ -1,8 +1,6 @@
 package za.ac.cput.factory;
 /* ReviewFactory.java
-
    Review Factory class
-
    Author: Alakhe Mxakato (230485316)
 
    Date: 28 June 2026
