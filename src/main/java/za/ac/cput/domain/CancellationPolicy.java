@@ -1,17 +1,29 @@
 package za.ac.cput.domain;
+/* CancellationPolicy.java
 
+   CancellationPolicy POJO class
+
+   Author: Entle Mayezo	(230076238)
+
+   Date: 21 June 2026
+*/
+import jakarta.persistence.*;
 import za.ac.cput.util.IdGenerator;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-
+@Entity
 public class CancellationPolicy {
+    @Id
     private String policyId;
     private String policyName;
     private int hoursBeforeCancellation;
     private double refundPercentage;
     private boolean allowsModification;
+    @Lob
     private String terms;
+
+    protected CancellationPolicy(){}
 
     private CancellationPolicy(Builder builder) {
         this.policyId = builder.policyId;
@@ -58,10 +70,19 @@ public class CancellationPolicy {
         private boolean allowsModification;
         private String terms;
 
-        public Builder(String policyName, double refundPercentage) {
-            this.policyId = IdGenerator.getInstance().toString();
+        public Builder setPolicyId(String policyId) {
+            this.policyId = policyId;
+            return this;
+        }
+
+        public Builder setPolicyName(String policyName) {
             this.policyName = policyName;
+            return this;
+        }
+
+        public Builder setRefundPercentage(double refundPercentage) {
             this.refundPercentage = refundPercentage;
+            return this;
         }
 
         public Builder setHoursBeforeCancellation(int hoursBeforeCancellation) {

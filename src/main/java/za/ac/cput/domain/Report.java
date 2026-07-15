@@ -1,7 +1,13 @@
 package za.ac.cput.domain;
+/* Report.java
 
+   Report POJO class
+
+   Author: Alakhe Mxakato (230485316)
+
+   Date: 21 June 2026
+*/
 import jakarta.persistence.*;
-import za.ac.cput.util.IdGenerator;
 
 import java.io.File;
 import java.time.LocalDateTime;
@@ -69,6 +75,7 @@ public class Report {
         private String generatedBy;
         private byte[] data;
         private String format;
+
 
         public Builder setReportId(String reportId) {
             this.reportId = reportId;

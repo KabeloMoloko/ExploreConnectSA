@@ -1,8 +1,13 @@
 package za.ac.cput.domain;
+/* Traveler.java
 
+   Traveler POJO class
+
+   Author: Alakhe Mxakato (230485316)
+
+   Date: 21 June 2026
+*/
 import jakarta.persistence.*;
-import za.ac.cput.util.IdGenerator;
-
 import java.time.LocalDate;
 import java.util.*;
 
@@ -98,6 +103,11 @@ public class Traveler {
         private List<String> travelerNames;
         private List<LocalDate> travelerAges;
         private List<String> passportNumbers;
+
+        public Builder setTravelerId(Long travelerId) {
+            this.travelerId = travelerId;
+            return this;
+        }
 
         public Builder setAdultCount(int adultCount) {
             this.adultCount = adultCount;

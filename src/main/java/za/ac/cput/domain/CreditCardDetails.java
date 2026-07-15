@@ -1,12 +1,25 @@
 package za.ac.cput.domain;
+/* CreditCardDetails.java
 
+   CreditCardDetails POJO class
+
+   Author: Ricardo Mukwevho (222567023)
+
+   Date: 21 June 2026
+*/
+import jakarta.persistence.*;
+
+@Embeddable
 public class CreditCardDetails {
+    @Id
     private String cardNumber;
     private String cardHolderName;
     private String expiryDate;
     private String lastFourDigits;
     private String cardType;
     private boolean isDefault;
+
+    protected CreditCardDetails(){}
 
     private CreditCardDetails(Builder builder) {
         this.cardNumber = builder.cardNumber;
@@ -55,22 +68,77 @@ public class CreditCardDetails {
         private String cardType;
         private boolean isDefault;
 
-        public Builder(String cardNumber, String cardHolderName, String expiryDate) {
+        public Builder set(String cardNumber, String cardHolderName, String expiryDate) {
             this.cardNumber = cardNumber;
             this.cardHolderName = cardHolderName;
             this.expiryDate = expiryDate;
-            this.lastFourDigits = cardNumber.substring(cardNumber.length() - 4);
 
-            // Determine card type from first digits
-            if (cardNumber.startsWith("4")) {
-                this.cardType = "Visa";
-            } else if (cardNumber.startsWith("5")) {
-                this.cardType = "Mastercard";
-            } else if (cardNumber.startsWith("3")) {
-                this.cardType = "American Express";
-            } else {
-                this.cardType = "Unknown";
+            // Extract last 4 digits
+            if (cardNumber != null && cardNumber.length() >= 4) {
+                this.lastFourDigits = cardNumber.substring(cardNumber.length() - 4);
             }
+
+            // Determine card type
+            if (cardNumber != null) {
+                if (cardNumber.startsWith("4")) {
+                    this.cardType = "Visa";
+                } else if (cardNumber.startsWith("5")) {
+                    this.cardType = "Mastercard";
+                } else if (cardNumber.startsWith("3")) {
+                    this.cardType = "American Express";
+                } else if (cardNumber.startsWith("6")) {
+                    this.cardType = "Discover";
+                } else {
+                    this.cardType = "Unknown";
+                }
+            }
+            return this;
+        }
+
+
+        public Builder setCardNumber(String cardNumber) {
+            this.cardNumber = cardNumber;
+
+            // Extract last 4 digits
+            if (cardNumber != null && cardNumber.length() >= 4) {
+                this.lastFourDigits = cardNumber.substring(cardNumber.length() - 4);
+            }
+
+            // Determine card type
+            if (cardNumber != null) {
+                if (cardNumber.startsWith("4")) {
+                    this.cardType = "Visa";
+                } else if (cardNumber.startsWith("5")) {
+                    this.cardType = "Mastercard";
+                } else if (cardNumber.startsWith("3")) {
+                    this.cardType = "American Express";
+                } else if (cardNumber.startsWith("6")) {
+                    this.cardType = "Discover";
+                } else {
+                    this.cardType = "Unknown";
+                }
+            }
+            return this;
+        }
+
+        public Builder setCardHolderName(String cardHolderName) {
+            this.cardHolderName = cardHolderName;
+            return this;
+        }
+
+        public Builder setExpiryDate(String expiryDate) {
+            this.expiryDate = expiryDate;
+            return this;
+        }
+
+        public Builder setLastFourDigits(String lastFourDigits) {
+            this.lastFourDigits = lastFourDigits;
+            return this;
+        }
+
+        public Builder setCardType(String cardType) {
+            this.cardType = cardType;
+            return this;
         }
 
         public Builder setDefault(boolean isDefault) {

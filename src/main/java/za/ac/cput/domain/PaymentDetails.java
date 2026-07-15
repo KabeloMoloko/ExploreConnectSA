@@ -1,21 +1,35 @@
 package za.ac.cput.domain;
+/* PaymentDetails.java
 
-import za.ac.cput.util.IdGenerator;
+   PaymentDetails POJO class
+
+   Author: Ricardo Mukwevho (222567023)
+
+   Date: 21 June 2026
+*/
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
-
+@Entity
 public class PaymentDetails {
+    @Id
     private Long paymentId;
     private String transactionId;
+    @Enumerated(EnumType.STRING)
     private PaymentMethod method;
+    @Enumerated(EnumType.STRING)
     private PaymentStatus status;
     private double amount;
     private String currency;
     private LocalDateTime paymentDate;
     private LocalDateTime lastUpdated;
+    @Embedded
     private BillingAddress billingAddress;
+    @Embedded
     private CreditCardDetails creditCardDetails;
     private String receiptUrl;
+
+    protected PaymentDetails(){}
 
     private PaymentDetails(Builder builder) {
         this.paymentId = builder.paymentId;
@@ -44,14 +58,6 @@ public class PaymentDetails {
     public CreditCardDetails getCreditCardDetails() { return creditCardDetails; }
     public String getReceiptUrl() { return receiptUrl; }
 
-    // Business methods
-    public boolean processPayment() {
-        this.status = PaymentStatus.PAID;
-        this.transactionId = "TXN-" + IdGenerator.getInstance().toString().substring(0, 10);
-        this.paymentDate = LocalDateTime.now();
-        this.lastUpdated = LocalDateTime.now();
-        return true;
-    }
 
     public boolean refund() {
         if (status == PaymentStatus.PAID) {
@@ -70,6 +76,13 @@ public class PaymentDetails {
     public boolean validatePayment() {
         return amount > 0 && method != null &&
                 (method != PaymentMethod.CREDIT_CARD || creditCardDetails != null);
+    }
+    public boolean processPayment() {
+        this.status = PaymentStatus.PAID;
+        this.transactionId = "TXN-" + System.currentTimeMillis();
+        this.paymentDate = LocalDateTime.now();
+        this.lastUpdated = LocalDateTime.now();
+        return true;
     }
 
     @Override
@@ -98,13 +111,29 @@ public class PaymentDetails {
         private CreditCardDetails creditCardDetails;
         private String receiptUrl;
 
-        public Builder(PaymentMethod method, double amount, String currency) {
-            this.paymentId = IdGenerator.getInstance().generateId();
+        public Builder setPaymentId(Long paymentId) {
+            this.paymentId = paymentId;
+            return this;
+        }
+
+        public Builder setMethod(PaymentMethod method) {
             this.method = method;
+            return this;
+        }
+
+        public Builder setAmount(double amount) {
             this.amount = amount;
+            return this;
+        }
+
+        public Builder setCurrency(String currency) {
             this.currency = currency;
-            this.status = PaymentStatus.PENDING;
-            this.lastUpdated = LocalDateTime.now();
+            return this;
+        }
+
+        public Builder setLastUpdated(LocalDateTime lastUpdated) {
+            this.lastUpdated = lastUpdated;
+            return this;
         }
 
         public Builder setTransactionId(String transactionId) {

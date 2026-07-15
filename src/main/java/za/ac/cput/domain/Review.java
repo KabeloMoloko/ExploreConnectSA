@@ -1,5 +1,12 @@
 package za.ac.cput.domain;
+/* Review.java
 
+   Review POJO class
+
+   Author: Alakhe Mxakato (230485316)
+
+   Date: 21 June 2026
+*/
 import jakarta.persistence.*;
 import za.ac.cput.util.IdGenerator;
 
@@ -78,6 +85,25 @@ public class Review {
         private Customer reviewer;
         private Booking booking;
 
+        public Builder setReviewId(Long reviewId) {
+            this.reviewId = reviewId;
+            return this;
+        }
+
+        public Builder setRating(int rating) {
+            this.rating = rating;
+            return this;
+        }
+
+        public Builder setComment(String comment) {
+            this.comment = comment;
+            return this;
+        }
+
+        public Builder setReviewer(Customer reviewer) {
+            this.reviewer = reviewer;
+            return this;
+        }
 
         public Builder setServiceType(String serviceType) {
             this.serviceType = serviceType;
