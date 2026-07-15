@@ -1,78 +1,82 @@
 package za.ac.cput.factory;
+/* TravelerFactory.java
 
-import za.ac.cput.domain.Traveler;
+   Traveler Factory class
+
+   Author: Alakhe Mxakato (230485316)
+
+   Date: 28 June 2026
+*/
+import za.ac.cput.domain.*;
 import za.ac.cput.util.Helper;
-import java.time.LocalDate;
+import za.ac.cput.util.IdGenerator;
 import java.util.List;
 
+public class TravelerFactory {
 
-            public class TravelerFactory  {
+    private static final IdGenerator idGenerator = new IdGenerator();
 
+    // Creates a traveler with default 1 adult
 
-                    // Basic Traveler with default 1 adult
-                    public static Traveler createTraveler() {
-                        return new Traveler.Builder()
-                                .build();
-                    }
+    public static Traveler createTraveler() {
+        Long travelerId = idGenerator.generateLongId();
 
-                    // Traveler with specific counts
-                    public static Traveler createTravelerWithCounts(int adultCount, int childCount,
-                                                                    int infantCount) {
-                        Helper.requireNotNegative(adultCount, "Adult Count");
-                        Helper.requireNotNegative(childCount, "Child Count");
-                        Helper.requireNotNegative(infantCount, "Infant Count");
+        return new Traveler.Builder()
+                .setTravelerId(travelerId)
+                .setAdultCount(1)
+                .setChildCount(0)
+                .setInfantCount(0)
+                .build();
+    }
 
-                        if (adultCount == 0 && childCount == 0 && infantCount == 0) {
-                            throw new IllegalArgumentException("At least one traveler required");
-                        }
+    //Creates a traveler with specific counts
 
-                        if (infantCount > adultCount) {
-                            throw new IllegalArgumentException("Infant count cannot exceed adult count");
-                        }
+    public static Traveler createTravelerWithCounts(int adultCount, int childCount, int infantCount) {
+        Helper.requireNotNegative(adultCount, "Adult Count");
+        Helper.requireNotNegative(childCount, "Child Count");
+        Helper.requireNotNegative(infantCount, "Infant Count");
 
-                        return new Traveler.Builder()
-                                .setAdultCount(adultCount)
-                                .setChildCount(childCount)
-                                .setInfantCount(infantCount)
-                                .build();
-                    }
+        if (adultCount == 0 && childCount == 0 && infantCount == 0) {
+            throw new IllegalArgumentException("At least one traveler is required");
+        }
+        if (infantCount > adultCount) {
+            throw new IllegalArgumentException("Infant count cannot exceed adult count");
+        }
 
-                    // Traveler with names and passport numbers
-                    public static Traveler createTravelerWithDetails(int adultCount, int childCount,
-                                                                     int infantCount,
-                                                                     List<String> travelerNames,
-                                                                     List<LocalDate> travelerAges,
-                                                                     List<String> passportNumbers) {
-                        Traveler traveler = createTravelerWithCounts(adultCount, childCount, infantCount);
+        Long travelerId = idGenerator.generateLongId();
 
-                        int totalTravelers = adultCount + childCount + infantCount;
+        return new Traveler.Builder()
+                .setTravelerId(travelerId)
+                .setAdultCount(adultCount)
+                .setChildCount(childCount)
+                .setInfantCount(infantCount)
+                .build();
+    }
 
-                        if (travelerNames != null && travelerNames.size() != totalTravelers) {
-                            throw new IllegalArgumentException("Number of names must match total travelers");
-                        }
+    // Creates a traveler with names and passport details
 
-                        if (passportNumbers != null && passportNumbers.size() != totalTravelers) {
-                            throw new IllegalArgumentException("Number of passports must match total travelers");
-                        }
+    public static Traveler createTravelerWithDetails(int adultCount, int childCount, int infantCount,
+                                                     List<String> travelerNames, List<String> passportNumbers) {
+        Traveler traveler = createTravelerWithCounts(adultCount, childCount, infantCount);
+        int totalTravelers = adultCount + childCount + infantCount;
 
-                        Traveler.Builder builder = new Traveler.Builder()
-                                .setAdultCount(adultCount)
-                                .setChildCount(childCount)
-                                .setInfantCount(infantCount);
+        if (travelerNames != null && travelerNames.size() != totalTravelers) {
+            throw new IllegalArgumentException("Number of names must match total travelers");
+        }
+        if (passportNumbers != null && passportNumbers.size() != totalTravelers) {
+            throw new IllegalArgumentException("Number of passports must match total travelers");
+        }
 
-                        if (travelerNames != null) {
-                            builder.setTravelerNames(travelerNames);
-                        }
-                        if (travelerAges != null) {
-                            builder.setTravelerAges(travelerAges);
-                        }
-                        if (passportNumbers != null) {
-                            builder.setPassportNumbers(passportNumbers);
-                        }
+        Traveler.Builder builder = new Traveler.Builder()
+                .copy(traveler);
 
-                        return builder.copy(traveler).build();
-                    }
-                }
+        if (travelerNames != null) {
+            builder.setTravelerNames(travelerNames);
+        }
+        if (passportNumbers != null) {
+            builder.setPassportNumbers(passportNumbers);
+        }
 
-
-
+        return builder.build();
+    }
+}
